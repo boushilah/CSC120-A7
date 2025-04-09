@@ -6,6 +6,12 @@ public class Student {
     private String id; 
     private int classYear; 
     private ArrayList<Course> classes; 
+    /**
+     * 
+     * @param name takes the name of the student
+     * @param id stores the id number of the student
+     * @param classYear is the student's year of graduation 
+     */
 
     public Student(String name, String id, int classYear) {
         this.name = name;
@@ -13,11 +19,17 @@ public class Student {
         this.classYear = classYear;
         this.classes = new ArrayList<>(); 
     }
-
+    /**
+     * 
+     * @return the name of the student
+     */
     public String getName() {
         return this.name; 
     }
-
+    /**
+     * returns the details of the student( name,id,classyear)
+     */
+    @Override
     public String toString() {
         return this.name + " ID: " + this.id + " Class Year: " + this.classYear;
     }
