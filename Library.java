@@ -1,5 +1,5 @@
 import java.util.Hashtable;
-public class Library extends Building{
+public class Library extends Building implements LibraryRequirements{
 
 private Hashtable<String, Boolean> collection;
 
@@ -42,13 +42,15 @@ public String removeTitle(String title){
  * Checks out a book from the collection
  * @param title the title of the book to tbe checked out. 
  */
-public void checkOut(String title){
-if(collection.containsKey(title)&& (collection.get(title)==true)){
-collection.put(title,false);
-}
-else{
-  System.out.println("This book is not available");
-}
+public void checkOut(String title) {
+  if (collection.containsKey(title) && collection.get(title)) {
+      collection.put(title, false);
+      System.out.println("You have successfully checked out: " + title);
+  } else if (!collection.containsKey(title)) {
+      throw new IllegalArgumentException("The book '" + title + "' is not in the collection.");
+  } else {
+      throw new IllegalStateException("The book '" + title + "' is already checked out.");
+  }
 }
 /**
  * Returning the book to the collection

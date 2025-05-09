@@ -1,6 +1,6 @@
 /* This is a stub for the House class */
 import java.util.ArrayList;
-public class House extends Building {
+public class House extends Building implements HouseRequirements {
   //Attributes 
   private ArrayList<Student> residents;
   private boolean hasDiningRoom;
@@ -18,7 +18,7 @@ public House(String name, String address,int nFloors, boolean hasDiningRoom,int 
 super(name,address,nFloors);
 this.hasDiningRoom= hasDiningRoom;
 this.initialCapacity= initialCapacity;
-residents = new ArrayList<>(initialCapacity);
+residents = new ArrayList<Student>(initialCapacity);
 System.out.println("You have built a house: 🏠");  
 }
 public boolean hasDiningRoom(){
@@ -33,50 +33,43 @@ public boolean hasDiningRoom(){
 }
 /**
  * Chekcs the number of residents in the house. 
- * @return the size of the resident in the house
+ * @return the size of the resident Arraylist
  */
   public int nResidents(){
-    if (residents== null)
-    {
+    if (residents== null){
       System.out.println(name+ " has no residents");
       return 0;
-    }
-    else{
+    } else{
     return  residents.size();
   }
-}
+  }
 /**
  * Adding new residents to the house.
  * checks whether the student is the house and if not add them to the residents arraylist.
  * @param s take the name of the student.
  * checks whether the student is the house and if not add them to the residents arraylist.
  */
-  public void moveIn(Student s)
-  {
-  if (!residents.contains(s)) {
+  public void moveIn(Student s){
+  if (!residents.contains(s)){
       residents.add(s);
-  }
-  else if (residents.size()>=maxcapacity){
+  } else if (residents.size()>=maxcapacity){
    System.out.println("The house is full. Find another lodging");   
-  }
-  else{
+  } else{
     System.out.println("The student is already in the house!");
   }
   }
 
   /**
-   * Method moves students out of the house. 
+   * Checks to see if the student is a resident and moves students out of the house. 
    * @param s take the name of the resident
-   * checks to see if the student is a resident
-   * @return their name if they existed in the house, null if they did not. 
+   * @return a student's name if they exist in the house, null if they do not. 
    */
   public Student moveOut(Student s){
     String name = s.getName();
     if(!residents.contains(s)){
       System.out.println("The student doesn't exist in this house");
       return null;
-    }
-    else{
+    } else{
       residents.remove(name);
       System.out.println("Resident "+name+" has been moved out");
       return s;
@@ -85,9 +78,9 @@ public boolean hasDiningRoom(){
   /**
    * checks the existence of the student in the house.
    * @param s name of the student
-   * @return whether the student exists in residents. 
+   * @return whether the student exists in the ArrayList residents. 
    */
-  boolean isResident(Student s){
+  public boolean isResident(Student s){
     return residents.contains(s);
   }
 

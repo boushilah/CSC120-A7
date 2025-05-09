@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Cafe extends Building {
+public class Cafe extends Building implements CafeRequirements{
 //Attributes
 private int nCoffeeOunces; // The number of ounces of coffee remaining in inventory
 private int nSugarPackets; // The number of sugar packets remaining in inventory
@@ -19,27 +19,24 @@ System.out.println("You have built a cafe: ☕");
   * @param nSugarPackets the number of sugar packs put into the coffee
   * @param nCreams the amount of cream that goes into the cafe. 
   */
- public void sellCoffee(int size, int nSugarPackets, int nCreams){
-    if((nCoffeeOunces-size>=0)&&(nSugarPackets-nSugarPackets>=0)&& (nCreams-nCreams>=0)&&(nCups>=0))
-    {
-        nCoffeeOunces-=12;
-        nSugarPackets-= 2;
-        nCreams-=3;
-        nCups-=1;
-        System.out.println("Coffe's Ready");
-    }
-    else{
-        System.out.println("");
+public void sellCoffee(int size, int nSugarPackets, int nCreams) {
+    if ((nCoffeeOunces >= size) && (this.nSugarPackets >= nSugarPackets) &&(this.nCreams >= nCreams) && (nCups > 0)) {
+        nCoffeeOunces -= size;
+        this.nSugarPackets -= nSugarPackets;
+        this.nCreams -= nCreams;
+        nCups--;
+        System.out.println("Coffee's ready!");
+    } else {
         System.out.println("We don't have the required stock!");
-        System.out.println("Would you like to restock?");
+        System.out.print("Would you like to restock? (yes/no): ");
         Scanner sc = new Scanner(System.in);
-    System.out.print("Would you like to restock? (yes/no): ");
-    String input = sc.nextLine();
-    if (input.equalsIgnoreCase("yes")) {
-        restock(20,50,50,50);
-}    
+        String input = sc.nextLine();
+        if (input.equalsIgnoreCase("yes")) {
+            restock(20, 50, 50, 50);
+        }
+    }
 }
-}
+
 /**
  * Restocks the ingredients 
  * @param nCoffeeOunces is the amount of coffe 
